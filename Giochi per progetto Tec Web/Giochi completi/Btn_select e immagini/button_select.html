@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <style media="screen">
+      .col-md {
+        border: 5px solid black;
+        height: 33%;
+        margin: 5px;
+        padding: 5px;
+      }
+      .immagine {
+        object-fit: contain;
+        max-width: 90%;
+        max-height: fit-content;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container-md">
+      <div class="row">
+        <div id="epoca1" class="col-md">
+          <h1>Antichita'</h1>
+          <br><br><br><br>
+        </div>
+        <div id="epoca2" class="col-md">
+          <h1>Rinascimento</h1>
+          <br><br><br><br>
+        </div>
+        <div id="epoca3" class="col-md">
+          <h1>Moderna</h1>
+          <br><br><br><br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md" id="el1">
+            <img src="vaso_etrusco.jpg" alt="" id="antichita" class="immagine">
+            <button type="button" class="btn btn-primary" onclick="correct(this)" id="btn1"> Antichita </button>
+            <button type="button" class="btn btn-primary"> Rinascimento </button>
+            <button type="button" class="btn btn-primary"> Moderna</button>
+        </div>
+        <div class="col-md" id="el2">
+          <img src="picasso.jpg" alt="" id="moderna" class="immagine">
+          <button type="button" class="btn btn-primary"> Antichita</button>
+          <button type="button" class="btn btn-primary"> Rinascimento</button>
+          <button type="button" class="btn btn-primary" onclick="correct(this)" id="btn2"> Moderna</button>
+        </div>
+        <div class="col-md" id="el3">
+          <img src="gioconda.jpg" alt="" id="rinascimento" class="immagine">
+          <button type="button" class="btn btn-primary"> Antichita</button>
+          <button type="button" class="btn btn-primary" onclick="correct(this)" id="btn3"> Rinascimento</button>
+          <button type="button" class="btn btn-primary"> Moderna</button>
+        </div>
+      </div>
+
+    </div>
+    <script charset="utf-8">
+      var cont = 0;
+      function correct(param){
+        if(param.id == "btn1"){
+          $("#epoca1").append($("#antichita"));
+          cont ++;
+          if(cont == 3) alert("Hai Superato il Test!");
+        }
+        else if(param.id == "btn2"){
+          $("#epoca3").append($("#moderna"));
+          cont ++;
+          if(cont == 3) alert("Hai Superato il Test!");
+        }
+        else if(param.id == "btn3"){
+          $("#epoca2").append($("#rinascimento"));
+          cont ++;
+          if(cont == 3) alert("Hai Superato il Test!");
+        }
+      }
+      
+    </script>
+  </body>
+</html>
