@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>jVectorMap demo</title>
+  <link rel="stylesheet" href="jquery-jvectormap-2.0.5.css" type="text/css" media="screen"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="jquery-jvectormap-2.0.5.min.js"></script>
+  <script src="jquery-jvectormap-world-mill.js"></script>
+  <script src="jquery-jvectormap-europe-mill.js"></script>
+  <script src="jquery-jvectormap-it_regions-mill.js"></script>
+  <script src="jquery-jvectormap-us-ny-newyork-mill.js"></script>
+  <script src="jquery-jvectormap-au-mill.js"></script>
+</head>
+<body>
+  <div id="world-map" style="width: 600px; height: 400px"></div>
+  <script>
+    $(function(){
+      $('#world-map').vectorMap({map: 'au_mill'});
+    });
+  </script>
+</body>
+</html>
