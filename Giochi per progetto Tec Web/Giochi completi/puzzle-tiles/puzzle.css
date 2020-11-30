@@ -1,0 +1,8 @@
+h1 {
+    text-align: center;
+    background-color: bisque;
+}
+p{
+    text-align: center;
+}
+canvas { display: block; margin: 50px auto; }
