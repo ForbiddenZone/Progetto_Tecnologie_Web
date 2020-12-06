@@ -1,19 +1,43 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1> Ciao, Seleziona i giochi: </h1>
+    <b-container>
+      <b-row>
+        <b-col> <b-button v-on:click="gioco1 = 'A'"> Gioco A </b-button> <b-button v-on:click="gioco1 = 'B'"> Gioco B </b-button> <br> {{ gioco1 }} </b-col>
+        <b-col> <b-button v-on:click="gioco2 = 'C'"> Gioco C </b-button> <b-button v-on:click="gioco2 = 'D'"> Gioco D </b-button> <br> {{ gioco2 }} </b-col>
+        <b-col> <b-button v-on:click="gioco3 = 'E'"> Gioco E </b-button> <b-button v-on:click="gioco3 = 'F'"> Gioco F </b-button> <br> {{ gioco3 }} </b-col>
+      </b-row>
+      <b-row> {{ gioco1 + gioco2 + gioco3 }} </b-row>
+      <b-row> <b-button v-on:click="sendData()"> Invia i giochi </b-button> </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      gioco1: "",
+      gioco2: "",
+      gioco3: ""
+    };
+  },
+  sockets: {
+    connect() {
+      console.log("Connesso al Server");
+    },
+  },
+  methods: {
+    sendData() {
+      let lista_giochi = [this.gioco1, this.gioco2, this.gioco3];
+      console.log(lista_giochi);
+      this.$socket.client.emit('choose_games', lista_giochi);
+    },
+  },
 }
+
 </script>
 
 <style>
