@@ -28,6 +28,9 @@ export default {
     connect() {
       console.log("Connesso al Server");
     },
+    test(data){
+      console.log(data);
+    }
   },
   methods: {
     sendData() {

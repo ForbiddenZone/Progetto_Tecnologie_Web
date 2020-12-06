@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1> {{ giochi }} </h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
+  data(){
+    return {
+      giochi: [],
+    }
+  },
+  sockets: {
+    connect() {
+      console.log("Connesso al Server");
+    },
+    return_data(lista_giochi) {
+      console.log(lista_giochi);
+      this.giochi = lista_giochi;
+    },
+    test(data){
+      console.log(data);
+    },
+  },
+  methods: {
+
+  },
 };
 </script>

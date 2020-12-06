@@ -13,13 +13,15 @@ const io = require("socket.io")(server, {
 });
 
 io.on('connection', (socket) => {
+  var dati_da_admin;
   socket.on('choose_games', (lista_giochi) => {
     //mando i giochi scelti al giocatore
     console.log(lista_giochi);
+    dati_da_admin = lista_giochi;
     socket.emit('return_data', lista_giochi);
   });
+  socket.emit('test', "porcodio");
 });
-
 
 //server run
 const PORT = process.env.PORT || 3000;
