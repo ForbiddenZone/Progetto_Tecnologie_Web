@@ -12,6 +12,11 @@ export default {
       giochi: [],
     }
   },
+
+      mounted:function() {
+      console.log("montato");  
+      },
+
   sockets: {
     connect() {
       console.log("Connesso al Server");

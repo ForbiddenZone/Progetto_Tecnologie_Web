@@ -1,0 +1,20 @@
+{
+"quesito":[
+ {
+  "domanda":"quali sono gli animali?",
+  "argomento":["pangolino","cane","pipistrello","coltello"],
+  "soluzione": 0
+ },
+ {
+  "domanda":"altra domanda",
+ "argomento":["piovra","cane","sasso","colibrì"],
+ "soluzione": 2
+ },
+ {
+  "domanda":"altra domanda",
+ "argomento":["piovra","cane","sasso","colibrì"],
+ "soluzione": 3
+ }
+ ]
+
+}

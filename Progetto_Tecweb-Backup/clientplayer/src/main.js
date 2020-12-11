@@ -6,6 +6,8 @@ import App from "./App.vue";
 import router from "./router";
 import VueSocketIOExt from "vue-socket.io-extended";
 import io from "socket.io-client";
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 export const socket = io("http://localhost:3000/", {
   withCredentials: true,
@@ -13,6 +15,9 @@ export const socket = io("http://localhost:3000/", {
     "data-from-twitter": "data-from.twitter",
   },
 });
+
+Vue.use(VueAxios, axios);
+
 Vue.use(VueSocketIOExt, socket);
 
 Vue.config.productionTip = false;
