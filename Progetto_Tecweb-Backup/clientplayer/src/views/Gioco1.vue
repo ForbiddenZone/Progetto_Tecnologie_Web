@@ -1,14 +1,19 @@
 <template>
   <div class="about">
     <h1>gioco 1</h1>
-    <div v-if="domande[0]!=null" class="col">
+    <div v-if="domande[0]!=null && numerodomanda<lunghezza" class="col">
       <h1>{{this.domande[numerodomanda].domanda}}</h1>
     <b-button @click="risposta(index)"  v-for="(item,index) in domande[numerodomanda].argomento" :key="item">
       {{item}}
     </b-button>
-    <b-button v-if="numerodomanda<2" @click="avanti"> avanti</b-button>
-    
+    <b-button v-if="numerodomanda<lunghezza -1" @click="avanti"> avanti
+    </b-button>
   </div>
+  <div v-if="numerodomanda>=lunghezza">
+  <h1 > hai fatto {{corrette}} domande corrette su {{lunghezza}}  </h1>
+<b-button @click="riprova()"> riprova</b-button>
+</div>
+
   </div>
 </template>
 
@@ -19,8 +24,9 @@ export default {
     return {
       numerodomanda: 0,
       soluzione: "",
+      lunghezza: "",
       domande: [],
-      giochi: [],
+      corrette: 0,
       items: [
   { message: 'Foo' },
   { message: 'Bar' }
@@ -36,7 +42,7 @@ export default {
      }
      console.log(this.domande);
      this.soluzione=myjson.quesito[0].soluzione;
-     console.log(this.soluzione);
+     this.lunghezza=this.domande.length;
       },
 
   sockets: {
@@ -49,8 +55,8 @@ export default {
       console.log(this.domande);
     },
 avanti() {
+    this.numerodomanda=this.numerodomanda+1;
   if (this.numerodomanda<2){
-  this.numerodomanda=this.numerodomanda+1;
   this.soluzione=this.domande[this.numerodomanda].soluzione;
 }
 },
@@ -59,11 +65,19 @@ risposta (data) {
 if (data==this.soluzione) {
   console.log("bravo");
   this.avanti();
+  this.corrette=this.corrette+1;
 }
 
   else {
-    console.log("magari muori");
+    this.avanti();
   }
+},
+
+riprova() {
+console.log("ciao");
+this.numerodomanda=0;
+this.soluzione=this.domande[0].soluzione;
+this.corrette=0;
 }
 
   },
