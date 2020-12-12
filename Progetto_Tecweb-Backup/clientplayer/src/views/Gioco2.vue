@@ -1,15 +1,19 @@
 <template>
   <div>
     <h1>gioco 2</h1>
-    <div>
-    <b-button @click="rimuovi(i)" v-for="(item, i) in parolachiave" v-bind:key="item">
+    <div v-if="parolachiave[0]!=null">
+    <b-button @click="rimuovi(i)" v-for="(item, i) in parolachiave" :key="i" v-bind:id="'A'+i">
       {{item}}
     </b-button>
   </div>
-  <div>
-  <b-button @click="inserisci(index)" v-for="(item2,index)  in parolachiave2" v-bind:key="item2">
+  <div v-if="parolachiave2[0]!=null">
+  <b-button @click="inserisci(index)" v-for="(item2,index)  in parolachiave2" :key="index" v-bind:id="'button2'+index">
     {{item2}}
   </b-button>
+</div>
+<div v-if="vittoria!=false">
+  <h1>HAI VINTO</h1>
+<b-button @click="azzera()"> ricomincia</b-button>
 </div>
   </div>
 
@@ -20,49 +24,84 @@
 export default {
   data(){
     return {
-      parola:"XXXXX",
-      parola2:"cassiopea",
+      parolasegreta:"procrastinare",
       parolachiave2: [],
       parolachiave: [],
-      caso2: [],
-      cane:[],
+      riserva:[],
+      vittoria:false,
+      lunghezzacasi: 20,
+      albero:[],
+      caratteri:'ABCDEFGHIJKLMNOPQRSTUVWYZ',
     }
   },
 
-      mounted:function() {
-      console.log('montato');
-      for (var i = 0; i < this.parola.length ; i++) {
-          this.parolachiave.splice(i, 1,this.parola[i]);
-      }
-      for (var j = 0; j < this.parola2.length ; j++) {
-          this.parolachiave2.splice(j, 1,this.parola2[j]);
-      }
-      console.log(this.parolachiave);
-      if(this.parolachiave=="XXXXX") {
-        console.log("yey");
-      }
-      else {
-        console.log("no");
-      }
-
+      created:function() {
+        this.azzera();
       },
 
   sockets: {
     },
   methods: {
+    azzera() {
+      this.parolachiave2=[];
+      this.parolachiave=[];
+      this.riserva=[];
+      this.albero=[];
+
+      for (var i = 0; i < this.parolasegreta.length ; i++) {
+          this.parolachiave.splice(i, 1,"X");
+          this.riserva.splice(i, 1,-1);
+      }
+      console.log(this.parolachiave);
+
+      for(var k=0; k<this.lunghezzacasi;k++) {
+        this.parolachiave2.splice(k,1,this.caratteri.charAt(Math.floor(Math.random() * this.caratteri.length)));
+      }
+      for (var j=0; j< this.parolasegreta.length; j++){
+        var vuoto=false;
+        var randomico=Math.floor(Math.random()*19);
+        while(vuoto==false){
+if(this.albero[randomico]!=-1){
+  this.parolachiave2.splice(randomico,1,this.parolasegreta[j]);
+  vuoto=true;
+  this.albero[randomico]=-1;
+}
+else {
+  randomico=Math.floor(Math.random()*19);
+}
+        }
+      }
+console.log(this.parolachiave2)
+          console.log(this.parolasegreta);
+    },
       rimuovi(i) {
-        console.log(i);
+if (this.parolachiave[i]!='X')     {
+        this.parolachiave2.splice(this.riserva[i],1,this.parolachiave[i]);
+        this.riserva[i]=-1;
         this.parolachiave.splice(i,1,"X");
         console.log(this.parolachiave);
+}
       },
       inserisci(i) {
         for (var j = 0; j < this.parolachiave.length ; j++) {
 if(this.parolachiave[j]=="X") {
   this.parolachiave.splice(j,1,this.parolachiave2[i]);
+      this.riserva.splice(j,1,i);
+    this.parolachiave2.splice(i,1,"X");
   j=this.parolachiave.length;
 }
         }
-        console.log(this.parolachiave);
+        var successo=0;
+        for (var k=0; k<this.parolachiave.length; k++) {
+          if (this.parolachiave[k]!=this.parolasegreta[k]){
+            k=this.parolachiave.length;
+            successo=1;
+          }
+        }
+        if(successo!=1) {
+          this.vittoria=true;
+          console.log("vittoria");
+        }
       }
   },
 };
