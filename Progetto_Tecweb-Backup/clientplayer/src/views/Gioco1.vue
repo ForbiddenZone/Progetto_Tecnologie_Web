@@ -1,10 +1,10 @@
-<template>
+ <template>
   <div class="about">
     <h1>gioco 1</h1>
     <div v-if="domande[0]!=null && numerodomanda<lunghezza" class="col">
       <h1>{{this.domande[numerodomanda].domanda}}</h1>
-    <b-button @click="risposta(index)"  v-for="(item,index) in domande[numerodomanda].argomento" :key="item">
-      {{item}}
+ <b-button @click="risposta(index)"  v-for="(item,index) in domande[numerodomanda].argomento" :key="index">
+    {{item}}
     </b-button>
     <b-button v-if="numerodomanda<lunghezza -1" @click="avanti"> avanti
     </b-button>
